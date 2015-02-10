@@ -4,19 +4,19 @@
 #include <arduino.h>
 
 // Signal duration when it is on its lowest value, in microseconds
-const long SIGNAL_SHORTEST = 670;
+const long SIGNAL_SHORTEST = 550;
 // Signal duration when it is on its highest value, in microseconds
-const long SIGNAL_LONGEST = 1500;
+const long SIGNAL_LONGEST = 1880;
 // Signal spacer inserted between each channel
 const long SIGNAL_SPACER = 400;
 // Total PPM frame duration in microseconds
-const long PPM_FRAME_LENGTH = 20000;
+const long PPM_FRAME_LENGTH = 22000;
 // Max value transmitter may send 
 const long MAX_RX_THROW = 2048;
 
 struct Signal {
   uint8_t state; // HIGH or LOW
-  int duration;  // duration of signal in microseconds
+  long duration;  // duration of signal in microseconds
   
   Signal(uint8_t s, int d): state(s), duration(d) {}
   Signal() : state(LOW), duration(SIGNAL_SHORTEST) {}

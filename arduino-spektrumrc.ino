@@ -1,7 +1,8 @@
-#include "SpektrumSatellite.h"
+//#include "SpektrumSatellite.h"
+#include "SpektrumSatellite2.h"
 #include "PPMOutput.h"
 
-SpektrumSatellite satellite(Serial1);
+SpektrumSatellite2 satellite(Serial1);
 PPMOutput ppm(52);
 
 void setup()
@@ -11,12 +12,14 @@ void setup()
   ppm.initialize();
 }
 
+TODO: SpektrumSatellite2 now assumes 10-bit resolution for channel data, can we somehow detect that???
+
 void loop() 
 {
   if (satellite.readFromSatellite()) {    
     // Got new data from satellite -> send it over PPM
     long* channels = satellite.getChannels();
-    ppm.outputPPM(channels, 8);
+    ppm.outputPPM(channels, satellite.getChannelCount());
     /*for (int i = 0; i < 8; ++i) {
       Serial.print(channels[i]); Serial.print(" ");
     }
